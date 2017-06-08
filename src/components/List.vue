@@ -23,14 +23,19 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'list',
   data () {
-    return {}
+    return {
+      tId: null
+    }
   },
   mounted () {
     this.$store.dispatch('init')
   },
   methods: {
     deletePerson (index) {
-      this.$store.dispatch('delete', index)
+      clearTimeout(this.tId)
+      this.tId = setTimeout(() => {
+        this.$store.dispatch('delete', index)
+      }, 250)
     }
   },
   computed: mapGetters([

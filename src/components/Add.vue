@@ -34,12 +34,14 @@ export default {
     postPerson (name, phone) {
       if (name === '' || phone === '') {
         this.remind = true
-        this.sen = '请输入联系人和电话'
+        this.sen = '请输入姓名和手机号'
       } else if (!(/^1[34578]\d{9}$/.test(phone))) {
         this.sen = '请输入正确的手机号码'
         this.remind = true
       } else {
         this.remind = false
+        name = this.trim(name)
+        phone = this.trim(phone)
         let onePerson = {
           name: name,
           phone: phone
@@ -48,6 +50,9 @@ export default {
         this.name = ''
         this.phone = ''
       }
+    },
+    trim (str) {
+      return str.replace(/^\s+|\s+$/gm, '')
     }
   },
   computed: mapGetters([
